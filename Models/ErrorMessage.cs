@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TriCommerce.Models;
 
 [Table("ErrorMessage")]
-public partial class ErrorMessage
+public class ErrorMessage
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
