@@ -224,7 +224,7 @@ namespace ECommerce.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.Color", b =>
+            modelBuilder.Entity("ECommerce.Models.Color", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -245,7 +245,7 @@ namespace ECommerce.Migrations
                     b.ToTable("Color");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.Customer", b =>
+            modelBuilder.Entity("ECommerce.Models.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -286,7 +286,7 @@ namespace ECommerce.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.ErrorMessage", b =>
+            modelBuilder.Entity("ECommerce.Models.ErrorMessage", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -347,7 +347,7 @@ namespace ECommerce.Migrations
                     b.ToTable("ErrorMessage");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.Order", b =>
+            modelBuilder.Entity("ECommerce.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -385,7 +385,7 @@ namespace ECommerce.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.Product", b =>
+            modelBuilder.Entity("ECommerce.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -437,7 +437,7 @@ namespace ECommerce.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.ProductImage", b =>
+            modelBuilder.Entity("ECommerce.Models.ProductImage", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -480,7 +480,7 @@ namespace ECommerce.Migrations
                     b.ToTable("ProductImage");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.ProductInformation", b =>
+            modelBuilder.Entity("ECommerce.Models.ProductInformation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -507,7 +507,7 @@ namespace ECommerce.Migrations
                     b.ToTable("ProductInformation");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.ProductPrice", b =>
+            modelBuilder.Entity("ECommerce.Models.ProductPrice", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -542,7 +542,7 @@ namespace ECommerce.Migrations
                     b.ToTable("ProductPrice");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.ProductVariant", b =>
+            modelBuilder.Entity("ECommerce.Models.ProductVariant", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -566,7 +566,7 @@ namespace ECommerce.Migrations
                     b.ToTable("ProductVariant");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.Size", b =>
+            modelBuilder.Entity("ECommerce.Models.Size", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -587,7 +587,7 @@ namespace ECommerce.Migrations
                     b.ToTable("Size");
                 });
 
-            modelBuilder.Entity("TriCommerce.Models.Stock", b =>
+            modelBuilder.Entity("ECommerce.Models.Stock", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

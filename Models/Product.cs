@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TriCommerce.Models;
+namespace ECommerce.Models;
 
 [Table("Product")]
 public class Product

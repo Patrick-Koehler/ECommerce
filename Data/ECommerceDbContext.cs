@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TriCommerce.Models;
+using ECommerce.Models;
 
 namespace ECommerce.Data
 {
