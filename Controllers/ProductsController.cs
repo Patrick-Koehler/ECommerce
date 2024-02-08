@@ -17,7 +17,7 @@ namespace ECommerce.Controllers
 
         public IActionResult CreateEditProduct(Product product)
         {
-
+            return RedirectToAction("Index");
         }
     }
 }

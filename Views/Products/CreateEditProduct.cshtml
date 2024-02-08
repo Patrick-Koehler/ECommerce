@@ -1,0 +1,11 @@
+﻿@model ECommerce.Models.Product
+
+@{
+    ViewData["Title"] = "Create or Edit Product";
+}
+
+<h5>Product bearbeiten</h5>
+
+<form asp-controller="Products" asp-action="CreateEditProduct">
+    <button class="btn btn-primary" type="submit">Save changes</button>
+</form>
