@@ -14,9 +14,13 @@ public class Product
     
     public required string ProductDescription { get; set; }
 
+    public string? ProductDescription2 { get; set; }
+
     public int? EAN { get; set; }
     
-    public string? Cathegory { get; set; }    
+    public string? ClassificationSchemeGroup { get; set; }
+
+    public string? Cathegory { get; set; }
     
     public string? Manufacturer { get; set; }
     

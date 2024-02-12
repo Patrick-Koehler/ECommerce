@@ -691,28 +691,6 @@ namespace ECommerce.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
-
-            modelBuilder.Entity<ProductPrice>()
-                .Property(p => p.PurchasePriceNet)
-                .HasPrecision(18, 2);
-            modelBuilder.Entity<ProductPrice>()
-                .Property(p => p.PurchasePrice)
-                .HasPrecision(18, 2);
-            modelBuilder.Entity<ProductPrice>()
-                .Property(p => p.RRP)
-                .HasPrecision(18, 2);
-            modelBuilder.Entity<ProductPrice>()
-                .Property(p => p.RetailPriceNet)
-                .HasPrecision(18, 2);
-            modelBuilder.Entity<ProductPrice>()
-                .Property(p => p.RetailPrice)
-                .HasPrecision(18, 2);
-            modelBuilder.Entity<Product>()
-                .Property(p => p.RetailPrice)
-                .HasPrecision(18, 2);
-            modelBuilder.Entity<Product>()
-                .Property(p => p.RRP)
-                .HasPrecision(18, 2);
 #pragma warning restore 612, 618
         }
     }
