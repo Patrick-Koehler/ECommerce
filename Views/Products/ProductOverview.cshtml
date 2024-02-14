@@ -1,3 +1,34 @@
-﻿@{
+﻿@model List<Product>
+
+@{
     ViewData["Title"] = "Artikelübersicht";
 }
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Artikelnummer</th>
+            <th>Artikelbezeichnung</th>
+            <th>Warengruppe</th>
+            <th>VK-Brutto</th>
+            <th>Aktionen</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @{
+            foreach(Product product in Model)
+            {
+                <tr>
+                    <td>@product.ProductNumber</td>
+                    <td>@product.ProductDescription</td>
+                    <td>@product.ClassificationSchemeGroup</td>
+                    <td>@product.RetailPrice</td>
+                    <td>
+                        <a asp-route-id="@product.Id" asp-controller="Products" asp-action="ProductDetails" class="btn btn-warning">Edit</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

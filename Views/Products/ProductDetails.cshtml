@@ -1,19 +1,17 @@
-﻿@model ECommerce.Models.Product
+﻿@model Product
 
 @{
     ViewData["Title"] = "Artikeldetails";
 
 }
 
-
-<form asp-controller="Products" asp-action="CreateEditProduct">
+<form asp-controller="Products" asp-action="ProductDetails">
 
     <h5>Artikeldetails</h5>
     <div class="mb-3">
         <label class="form-label">Artikelnummer</label>
         <div class="col-sm-3">
-
-            <input type="text" class="form-control form-control-sm" asp-for="ProductNumber" />
+            <input type="text" class="form-control form-control-sm" asp-for="ProductNumber" placeholder=""/>
         </div>
     </div>
     <div class="mb-3">

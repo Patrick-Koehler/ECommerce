@@ -8,16 +8,19 @@ public class Order
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
-    public Guid CustomerId { get; set; }
+    public required Guid Id { get; set; }
+    public required Guid CustomerId { get; set; }
+    public required Guid DeliveryAdress { get; set; }
     public bool IsNew { get; set; }
     public bool IsCompleted { get; set; }
     public string? OrderState { get; set; }
     public string? Payment { get; set; }
+    public string? Reference { get; set; }
     public string? Notice { get; set; }
+    public string? TrackingNumber { get; set; }
 
     [Column(TypeName = "smalldatetime")]
-    public DateTime OrderImportDate { get; set; }
+    public DateTime OrderRecievedDate { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public DateTime Created { get; set; }

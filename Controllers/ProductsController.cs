@@ -15,13 +15,21 @@ namespace ECommerce.Controllers
         }
         public IActionResult ProductOverview()
         {
-
-            return View();
+            var products = _context.Products.ToList();
+            return View(products);
         }
 
         public IActionResult ProductDetails(Guid id)
         {
-            return View();
+            var product = _context.Products.SingleOrDefault(x => x.Id == id);
+            if(product != null)
+            {
+                return View(product);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         public IActionResult CreateEditProduct(Product product)
@@ -55,7 +63,7 @@ namespace ECommerce.Controllers
             
             _context.SaveChanges();
 
-            return RedirectToAction("CreateEditProduct");
+            return RedirectToAction("ProductDetails");
         }
     }
 }
