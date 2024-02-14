@@ -6,26 +6,26 @@
 }
 
 
-<form asp-controller="Products" asp-action="AddProduct">
-    
+<form asp-controller="Products" asp-action="CreateEditProduct">
+
     <h5>Artikeldetails</h5>
     <div class="mb-3">
         <label class="form-label">Artikelnummer</label>
         <div class="col-sm-3">
-            
+
             <input type="text" class="form-control form-control-sm" asp-for="ProductNumber" />
         </div>
-        </div>
+    </div>
     <div class="mb-3">
         <label class="form-label">Artikelbezeichnung</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control form-control-sm" asp-for="ProductDescription"/>
+            <input type="text" class="form-control form-control-sm" asp-for="ProductDescription" />
         </div>
-        </div>
+    </div>
     <div class="mb-3">
         <label class="form-label">Artikelbezeichnung 2</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control form-control-sm" asp-for="ProductDescription2"/>
+            <input type="text" class="form-control form-control-sm" asp-for="ProductDescription2" />
         </div>
     </div>
     <div class="mb-3">
@@ -52,7 +52,7 @@
             <input class="form-control form-control-sm" asp-for="ClassificationSchemeGroup" />
         </div>
     </div>
-    
+
     <hr />
     <h5>Preise</h5>
     <div class="mb-3">
@@ -69,6 +69,6 @@
     </div>
 
     <hr />
-    <button class="btn btn-primary" type="submit">Save changes</button>    
+    <button class="btn btn-primary" type="submit">Save changes</button>
 
 </form>

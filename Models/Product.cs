@@ -34,12 +34,12 @@ public class Product
 
     public bool IsMain { get; set; }
 
-    [Column(TypeName = "smalldatetime")]
-    public required DateTime Created { get; set; }
+    //[Column(TypeName = "smalldatetime")]
+    //public required DateTime Created { get; set; }
     
-    [Column(TypeName = "smalldatetime")]
-    public DateTime? Modified { get; set; }
+    //[Column(TypeName = "smalldatetime")]
+    //public DateTime? Modified { get; set; }
 
-    [Column(TypeName = "smalldatetime")]
-    public DateTime? AvailableFrom { get; set; }
+    //[Column(TypeName = "smalldatetime")]
+    //public DateTime? AvailableFrom { get; set; }
 }

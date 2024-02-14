@@ -5,12 +5,23 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    //Products
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Artikelübersicht</a>
+        <a class="nav-link text-dark" asp-controller="Products" asp-action="ProductOverview">Artikelübersicht</a>
     </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="CreateEditProduct">Artikel</a>
-        </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Products" asp-action="ProductDetails">Artikel</a>
+    </li>
+
+    //Orders
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Orders" asp-action="OrderOverview">Bestellübersicht</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Orders" asp-action="OrderDetails">Bestellung</a>
+    </li>
+
+    //User
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>
@@ -22,9 +33,9 @@
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
+    //<li class="nav-item">
+    //  <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    //</li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
