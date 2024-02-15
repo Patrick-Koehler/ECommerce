@@ -22,13 +22,13 @@ namespace ECommerce.Controllers
         public IActionResult ProductDetails(Guid id)
         {
             var product = _context.Products.SingleOrDefault(x => x.Id == id);
-            if(product != null)
+            if (product != null)
             {
                 return View(product);
             }
             else
             {
-                return NotFound();
+                return View();
             }
         }
 

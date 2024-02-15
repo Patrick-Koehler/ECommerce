@@ -11,6 +11,7 @@ namespace ECommerce.Data
         {
         }
 
+        public DbSet<ClassificationSchemeGroup> ClassificationSchemeGroups { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<ErrorMessage> ErrorMessages { get; set; }
