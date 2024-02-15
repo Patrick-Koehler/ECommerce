@@ -22,6 +22,29 @@ namespace ECommerce.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ECommerce.Models.ClassificationSchemeGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClassificationSchemeGroup");
+                });
+
             modelBuilder.Entity("ECommerce.Models.Color", b =>
                 {
                     b.Property<Guid>("Id")
@@ -177,10 +200,16 @@ namespace ECommerce.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DeliveryAdress")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsNew")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPayed")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Modified")
@@ -189,13 +218,19 @@ namespace ECommerce.Migrations
                     b.Property<string>("Notice")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderImportDate")
+                    b.Property<DateTime>("OrderRecievedDate")
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("OrderState")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Payment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrackingNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

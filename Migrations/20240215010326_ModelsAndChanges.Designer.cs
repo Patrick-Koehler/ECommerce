@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    [Migration("20240212222202_someChanges2")]
-    partial class someChanges2
+    [Migration("20240215010326_ModelsAndChanges")]
+    partial class ModelsAndChanges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,29 @@ namespace ECommerce.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ECommerce.Models.ClassificationSchemeGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClassificationSchemeGroup");
+                });
 
             modelBuilder.Entity("ECommerce.Models.ProductColor", b =>
                 {
@@ -180,10 +203,16 @@ namespace ECommerce.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DeliveryAdress")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsNew")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPayed")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Modified")
@@ -192,13 +221,19 @@ namespace ECommerce.Migrations
                     b.Property<string>("Notice")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderImportDate")
+                    b.Property<DateTime>("OrderRecievedDate")
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("OrderState")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Payment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrackingNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -236,17 +271,11 @@ namespace ECommerce.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("AvailableFrom")
-                        .HasColumnType("smalldatetime");
-
                     b.Property<string>("Cathegory")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClassificationSchemeGroup")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("smalldatetime");
 
                     b.Property<int?>("EAN")
                         .HasColumnType("int");
@@ -262,9 +291,6 @@ namespace ECommerce.Migrations
 
                     b.Property<string>("ManufacturerNumber")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Modified")
-                        .HasColumnType("smalldatetime");
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()

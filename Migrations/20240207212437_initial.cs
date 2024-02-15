@@ -51,17 +51,17 @@ namespace ECommerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Color",
+                name: "ProductColor",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ColorDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Color", x => x.Id);
+                    table.PrimaryKey("PK_ProductColor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -425,7 +425,7 @@ namespace ECommerce.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Color");
+                name: "ProductColor");
 
             migrationBuilder.DropTable(
                 name: "Customer");

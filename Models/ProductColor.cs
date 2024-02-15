@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models;
 
-[Table("Color")]
-public class Color
+[Table("ProductColor")]
+public class ProductColor
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public required Guid Id { get; set; }
 
-    public required string ColorDescription { get; set; }
+    public required string Description { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public required DateTime Created { get; set; }

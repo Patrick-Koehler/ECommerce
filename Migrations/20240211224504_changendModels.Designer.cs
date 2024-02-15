@@ -25,13 +25,13 @@ namespace ECommerce.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ECommerce.Models.Color", b =>
+            modelBuilder.Entity("ECommerce.Models.ProductColor", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ColorDescription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -43,7 +43,7 @@ namespace ECommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Color");
+                    b.ToTable("ProductColor");
                 });
 
             modelBuilder.Entity("ECommerce.Models.Customer", b =>
