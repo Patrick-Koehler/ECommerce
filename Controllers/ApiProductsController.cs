@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 using ECommerce.Models;
+using ECommerce.Models.Dtos;
 
 namespace ECommerce.Controllers;
 
@@ -11,13 +12,10 @@ namespace ECommerce.Controllers;
 [ApiController]
 public class ApiProductsController : ControllerBase
 {
-
-    //private readonly IApiProductsService _apiProductsService;
     private readonly ECommerceDbContext _context;
-    public ApiProductsController(ECommerceDbContext context/*, IApiProductsService apiProductsService*/)
+    public ApiProductsController(ECommerceDbContext context)
     {
         _context = context;
-        //_apiProductsService = apiProductsService;
     }
 
     #region Products
@@ -38,25 +36,24 @@ public class ApiProductsController : ControllerBase
     /// Posts a List of ProductColors to Database.
     /// </summary>
     [HttpPost("ProductColors")]
-    public IActionResult PostProductColorsAsync([FromBody] List<Models.ProductColor> colors)
+    public IActionResult PostProductColorsAsync([FromBody] List<ProductColorDto> newColors)
     {
         DateTime current = DateTime.Now;
-        foreach(var color in colors)
+        foreach (var newColor in newColors)
         {
-            Models.ProductColor newColor = new()
+            ProductColor color = new()
             {
                 Id = Guid.NewGuid(),
-                Description = color.Description,
+                Description = newColor.Description,
                 Created = current,
                 Modified = null
             };
-            _context.ProductColors.Add(newColor);
-        }        
+            _context.ProductColors.Add(color);
+        }
         _context.SaveChanges();
 
         return Ok();
     }
-
     #endregion
 
     #region Products/Sizes
