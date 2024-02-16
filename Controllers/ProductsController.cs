@@ -41,9 +41,9 @@ namespace ECommerce.Controllers
                 {
                     product.ProductNumber = "11111";
                 }
-                if (product.ProductDescription == null)
+                if (product.Description == null)
                 {
-                    product.ProductDescription = "Hello World";
+                    product.Description = "Hello World";
                 }
                 _context.Products.Add(product);
             }

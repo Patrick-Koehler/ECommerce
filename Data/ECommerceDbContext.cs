@@ -12,18 +12,19 @@ namespace ECommerce.Data
         }
 
         public DbSet<ClassificationSchemeGroup> ClassificationSchemeGroups { get; set; }
-        public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<ErrorMessage> ErrorMessages { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductAttribute> ProductAttributes { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductInformation> ProductInformations { get; set; }
         public DbSet<ProductPrice> ProductPrices { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
-        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ProductSize> Sizes { get; set; }
         public DbSet<Stock> Stocks { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

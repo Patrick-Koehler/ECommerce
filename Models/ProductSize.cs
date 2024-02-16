@@ -3,16 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models;
 
-[Table("Size")]
-public class Size
+[Table("ProductSize")]
+public class ProductSize
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
-    public string SizeDescription { get; set; } = null!;
+    public required Guid Id { get; set; }
+    
+    public required string Description { get; set; }
 
     [Column(TypeName = "smalldatetime")]
-    public DateTime Created { get; set; }
+    public required DateTime Created { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public DateTime? Modified { get; set; }

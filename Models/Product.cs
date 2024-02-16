@@ -12,9 +12,13 @@ public class Product
     
     public required string ProductNumber { get; set; }
     
-    public required string ProductDescription { get; set; }
+    public required string Description { get; set; }
 
-    public string? ProductDescription2 { get; set; }
+    public string? Description2 { get; set; }
+
+    public Guid Color { get; set; }
+
+    public Guid Size { get; set; }
 
     public int? EAN { get; set; }
     

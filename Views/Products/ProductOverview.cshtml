@@ -11,6 +11,7 @@
             <th>Artikelbezeichnung</th>
             <th>Warengruppe</th>
             <th>VK-Brutto</th>
+            <th>Lagerbestand</th>
             <th>Aktionen</th>
         </tr>
     </thead>
@@ -21,9 +22,10 @@
             {
                 <tr>
                     <td>@product.ProductNumber</td>
-                    <td>@product.ProductDescription</td>
+                    <td>@product.Description</td>
                     <td>@product.ClassificationSchemeGroup</td>
                     <td>@product.RetailPrice</td>
+                    <td>stock</td>
                     <td>
                         <a asp-route-id="@product.Id" asp-controller="Products" asp-action="ProductDetails" class="btn btn-warning">Edit</a>
                     </td>
