@@ -1,14 +1,10 @@
-﻿namespace ECommerce.Helpers
+﻿namespace ECommerce.Helpers;
+
+public enum OrderStatus
 {
-    public class OrderState
-    {
-        public enum SupplierStatus
-        {
-            Recieved,
-            InProcess,
-            Packed,
-            Delivered,
-            Canceled
-        }
-    }
+    Recieved,
+    InProcess,
+    Packed,
+    Delivered,
+    Canceled
 }

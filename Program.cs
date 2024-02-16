@@ -1,4 +1,6 @@
 using ECommerce.Data;
+using ECommerce.Services;
+using ECommerce.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,14 +14,15 @@ public class Program
 
         // Add services to the container.
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-        builder.Services.AddDbContext<Data.ECommerceDbContext>(options =>
-            options.UseSqlServer(connectionString));
+        builder.Services.AddDbContext<Data.ECommerceDbContext>(options => options.UseSqlServer(connectionString));
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<Data.ECommerceDbContext>();
         builder.Services.AddControllersWithViews();
 
+        //Services and ApiInterfaces
+        builder.Services.AddScoped<IApiOrdersService, ApiOrdersService>();
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

@@ -10,11 +10,11 @@ namespace ECommerce.Services
 {
     public class ApiProductColorsService : IApiProductColorsService
     {
-        private readonly ECommerceDbContext _context;
-        public ApiProductColorsService(ECommerceDbContext context)
-        {
-            _context = context;
-        }
+        //private readonly ECommerceDbContext _context;
+        //public ApiProductColorsService(ECommerceDbContext context)
+        //{
+        //    _context = context;
+        //}
 
         //public async Task<RowCounter> AddNewProductColorAsync(List<ProductColorDto> newProductColors)
         //{
