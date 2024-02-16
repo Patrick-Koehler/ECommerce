@@ -1,4 +1,4 @@
-﻿<form asp-controller="Products" asp-action="_ProductImages">
+﻿<form asp-controller="Products" asp-action="CreateProductImage" enctype="multipart/form-data">
     <div class="card">
         <div class="card-header">
             <h5>Bilder</h5>
@@ -7,21 +7,16 @@
         <div class="card-body">
             <img alt="Bild"/>
 
-            <div class="input-group mb-3">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile02">
-                    <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                </div>
-                <div class="input-group-append">
-                    <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
-                </div>
+            <div class="mb-3">
+                <label>Bild</label>
+                <input class="form-control-file" name="file" type="file">
             </div>
-        </div>
-
-        <div class="card-footer">
-            <button class="btn btn-primary" type="submit">Save changes</button>
+            
+            <!--div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div-->
+            <button class="btn btn-primary" type="submit" style="float: right;">Save changes</button>
         </div>
     </div>
-
-    
 </form>

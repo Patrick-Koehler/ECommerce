@@ -8,7 +8,7 @@ public class Product
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
     
     public required string ProductNumber { get; set; }
     

@@ -9,7 +9,7 @@ public class ErrorMessage
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
 
     [StringLength(50)]
     [Unicode(false)]
@@ -48,5 +48,5 @@ public class ErrorMessage
     public string? UserAgent { get; set; }
 
     [Column(TypeName = "smalldatetime")]
-    public DateTime Created { get; set; }
+    public required DateTime Created { get; set; }
 }

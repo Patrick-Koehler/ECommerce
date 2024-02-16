@@ -12,7 +12,9 @@ namespace ECommerce.Data
         }
 
         public DbSet<ClassificationSchemeGroup> ClassificationSchemeGroups { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<DeliveryAdress> DeliveryAdresses { get; set; }
         public DbSet<ErrorMessage> ErrorMessages { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Order> Orders { get; set; }

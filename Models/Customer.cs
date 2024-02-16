@@ -10,7 +10,7 @@ public class Customer
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public required Guid Id { get; set; }
 
-    public int CustomerNumber { get; set; }
+    public required int CustomerNumber { get; set; }
 
     public string? FirstName { get; set; }
 
@@ -25,6 +25,8 @@ public class Customer
     public string? Phonenumber { get; set; }
 
     public string? Email { get; set; }
+    public DateOnly Birthday { get; set; }
+    public DateOnly CustomerSince { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public required DateTime Created { get; set; }

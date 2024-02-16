@@ -8,7 +8,7 @@ public class ProductImage
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
     public required Guid ProductId { get; set; }
     public required string ProductNumber { get; set; }
     public required string ProductDescription { get; set; }
