@@ -23,8 +23,8 @@ namespace ECommerce.Data
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductInformation> ProductInformations { get; set; }
         public DbSet<ProductPrice> ProductPrices { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
-        public DbSet<ProductSize> Sizes { get; set; }
         public DbSet<Stock> Stocks { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
