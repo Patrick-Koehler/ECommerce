@@ -6,5 +6,6 @@ namespace ECommerce.Services.Interfaces
     public interface IApiOrdersService
     {
         public Task<RowCounter> AddNewOrderAsync(List<OrderDto> newOrders);
+        public Task DeleteOrdersAll();
     }
 }

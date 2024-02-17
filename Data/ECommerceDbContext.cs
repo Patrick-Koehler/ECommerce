@@ -17,17 +17,19 @@ namespace ECommerce.Data
         public DbSet<DeliveryAdress> DeliveryAdresses { get; set; }
         public DbSet<ErrorMessage> ErrorMessages { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceItem> InvoiceItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductAttribute> ProductAttributes { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
+        public DbSet<ProductDetail> ProductDetails { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<ProductInformation> ProductInformations { get; set; }
         public DbSet<ProductPrice> ProductPrices { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+        public DbSet<StockBranch> StocksBranches { get; set; } 
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

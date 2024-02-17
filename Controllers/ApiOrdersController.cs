@@ -14,11 +14,9 @@ namespace ECommerce.Controllers;
 public class ApiOrdersController : ControllerBase
 {
     private readonly IApiOrdersService _apiOrdersService;
-    private readonly ECommerceDbContext _context;
-    public ApiOrdersController(IApiOrdersService apiOrdersService, ECommerceDbContext context)
+    public ApiOrdersController(IApiOrdersService apiOrdersService)
     {
         _apiOrdersService = apiOrdersService;
-        _context = context;
     }
 
     [HttpPost("Orders")]
@@ -29,10 +27,16 @@ public class ApiOrdersController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("Orders")]
-    public IActionResult DeleteAll()
+    [HttpDelete("Orders/All")]
+    public async Task <IActionResult> DeleteOrdersAll()
     {
-        _context.Orders.ExecuteDelete();
+        await _apiOrdersService.DeleteOrdersAll();
+        return Ok();
+    }
+
+    [HttpDelete("Orders/ById")]
+    public IActionResult DeleteOrdersById([FromBody] string id)
+    {
         return Ok();
     }
 }

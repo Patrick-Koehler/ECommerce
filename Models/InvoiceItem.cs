@@ -12,6 +12,8 @@ public class InvoiceItem
     
     public required Guid InvoiceId { get; set; }
 
+    public string? FrameNumber { get; set; }
+
     [Column(TypeName = "smalldatetime")]
     public required DateTime Created { get; set; }
 

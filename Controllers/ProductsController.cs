@@ -32,7 +32,7 @@ namespace ECommerce.Controllers
             }
         }
 
-        public IActionResult CreateEditProduct(Product product, IFormFile file)
+        public IActionResult CreateEditProduct(Product product)
         {
             if(product.Id == Guid.Empty)
             {
@@ -53,16 +53,20 @@ namespace ECommerce.Controllers
             return RedirectToAction("ProductDetails");
         }
 
-        public IActionResult CreateProductImage(Configuration configuration, IFormFile file)
+        public IActionResult AddProductImage(ProductImage productImage, IFormFile file)
         {
+            DateTime current = DateTime.Now;
             if(file != null)
             {
                 using (var ms = new MemoryStream())
                 {
                     file.CopyTo(ms);
                     var bytes = ms.ToArray();
-                    configuration.CompanyImage = bytes;
+                    productImage.ImageData = bytes;
+                    productImage.Created = current;
                 };
+                _context.ProductImages.Add(productImage);
+                _context.SaveChanges();
             }
 
             return RedirectToAction("ProductDetails");

@@ -4,6 +4,8 @@ using ECommerce.Models;
 using ECommerce.Models.Dtos;
 using ECommerce.Services.Interfaces;
 using ECommerce.Wrapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Services
 {
@@ -44,6 +46,11 @@ namespace ECommerce.Services
             }
             await _context.SaveChangesAsync();
             return rowCounter;
+        }
+
+        public async Task DeleteOrdersAll()
+        {
+            await _context.Products.ExecuteDeleteAsync();
         }
     }
 }

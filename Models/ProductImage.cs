@@ -17,6 +17,7 @@ public class ProductImage
     public string? ProductVariantNumber { get; set; }
     public int? Position { get; set; }
     public string? URL { get; set; }
+    public byte[]? ImageData { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public required DateTime Created { get; set; }
