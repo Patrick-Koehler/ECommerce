@@ -48,8 +48,22 @@ public class ApiProductsController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("")]
-
+    /// <summary>
+    /// Deletes specific rows from the Products table by Id.
+    /// </summary>
+    /// <param name="ids">List of SellerItemId's to be deleted.</param>
+    [HttpDelete("ById")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DeleteProductsByIdAsync([FromBody] Guid[] ids)
+    {
+        RowCounter rowCounter = await _apiProductsService.DeleteProductsByIdAsync(ids);
+        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter); 
+        return Ok();
+    }
 
     /// <summary>
     /// Deletes all Products from Databasee.
@@ -75,7 +89,8 @@ public class ApiProductsController : ControllerBase
     [HttpPost("Colors")]
     public async Task<IActionResult> PostProductColors([FromBody] List<ProductColorDto> newProductColors)
     {
-        await _apiProductColorsService.AddNewProductColorAsync(newProductColors);
+        RowCounter rowCounter = await _apiProductColorsService.AddNewProductColorAsync(newProductColors);
+        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
         return Ok();
     }
     #endregion

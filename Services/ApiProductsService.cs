@@ -19,6 +19,7 @@ namespace ECommerce.Services
         {
             return new ProductDto()
             {
+                Id = product.Id,
                 ProductNumber = product.ProductNumber,
                 Description = product.Description,
                 Color = product.Color,
@@ -73,10 +74,20 @@ namespace ECommerce.Services
             return (rowCounter);
         }
 
+        public async Task<RowCounter> DeleteProductsByIdAsync(Guid[] ids)
+        {
+            RowCounter rowCounter = new();
+            foreach(var id in ids)
+            {
+                rowCounter.DeletedRows += await _context.Products.Where(x => x.Id == id).ExecuteDeleteAsync();
+            }
+            return rowCounter;
+        }
+
         public async Task<RowCounter> DeleteProductsAllAsync()
         {
             RowCounter rowCounter = new();
-            rowCounter.DeletedRows = +await _context.Products.ExecuteDeleteAsync();
+            rowCounter.DeletedRows += await _context.Products.ExecuteDeleteAsync();
             return rowCounter;
         }
     }

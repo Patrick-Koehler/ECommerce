@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    [Migration("20240218000145_initial")]
+    [Migration("20240218220127_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -94,6 +94,12 @@ namespace ECommerce.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Info")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsOneTimeCustomer")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -585,7 +591,6 @@ namespace ECommerce.Migrations
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Modified")
@@ -651,6 +656,16 @@ namespace ECommerce.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BranchName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("smalldatetime");
 
                     b.HasKey("Id");
 

@@ -25,8 +25,13 @@ public class Customer
     public string? Phonenumber { get; set; }
 
     public string? Email { get; set; }
+    
     public DateOnly Birthday { get; set; }
+    
     public DateOnly CustomerSince { get; set; }
+
+    public string? Info { get; set; }
+    public bool IsOneTimeCustomer { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public required DateTime Created { get; set; }

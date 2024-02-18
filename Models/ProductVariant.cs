@@ -10,7 +10,7 @@ public class ProductVariant
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public required Guid Id { get; set; }
     public int ProductVariantNumber { get; set; }
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public required DateTime Created { get; set; }

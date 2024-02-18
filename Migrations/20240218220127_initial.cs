@@ -93,6 +93,8 @@ namespace ECommerce.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Birthday = table.Column<DateOnly>(type: "date", nullable: false),
                     CustomerSince = table.Column<DateOnly>(type: "date", nullable: false),
+                    Info = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsOneTimeCustomer = table.Column<bool>(type: "bit", nullable: false),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
@@ -347,7 +349,7 @@ namespace ECommerce.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductVariantNumber = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
@@ -383,7 +385,10 @@ namespace ECommerce.Migrations
                 name: "StockBranch",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: false)
                 },
                 constraints: table =>
                 {

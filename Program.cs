@@ -28,6 +28,7 @@ public class Program
         //Services and ApiInterfaces
         builder.Services.AddScoped<IApiOrdersService, ApiOrdersService>();
         builder.Services.AddScoped<IApiProductsService, ApiProductsService>();
+        builder.Services.AddScoped<IApiProductColorsService, ApiProductColorsService>();
         
         var app = builder.Build();
 

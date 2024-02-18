@@ -15,6 +15,7 @@ public class Product
     public required string Description { get; set; }
 
     public string? Description2 { get; set; }
+    
     public Guid Color { get; set; }
 
     public Guid Size { get; set; }
@@ -28,9 +29,13 @@ public class Product
     public bool IsBike { get; set; }
 
     public bool IsMain { get; set; }
+    
     public int? EAN { get; set; }
+    
     public string? ManufacturerNumber { get; set; }
+    
     public decimal RetailPrice { get; set; }
+    
     public decimal RRP { get; set; }
 
     [Column(TypeName = "smalldatetime")]

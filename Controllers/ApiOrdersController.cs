@@ -35,7 +35,7 @@ public class ApiOrdersController : ControllerBase
     }
 
     [HttpDelete("Orders/ById")]
-    public IActionResult DeleteOrdersById([FromBody] string id)
+    public IActionResult DeleteOrdersById([FromBody] Guid id)
     {
         return Ok();
     }
