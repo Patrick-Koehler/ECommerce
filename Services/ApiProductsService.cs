@@ -2,6 +2,8 @@
 using ECommerce.Models;
 using ECommerce.Models.Dtos;
 using ECommerce.Services.Interfaces;
+using ECommerce.Wrapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Services
 {
@@ -13,8 +15,39 @@ namespace ECommerce.Services
             _context = context;
         }
 
-        public async Task AddNewProductsAsync(List<ProductDto> newProducts)
+        public ProductDto ToProductDto(Product product)
         {
+            return new ProductDto()
+            {
+                ProductNumber = product.ProductNumber,
+                Description = product.Description,
+                Color = product.Color,
+                Size = product.Size,
+                ClassificationSchemeGroup = product.ClassificationSchemeGroup,
+                Cathegory = product.Cathegory,
+                Manufacturer = product.Manufacturer,
+                IsBike = product.IsBike,
+                IsMain = product.IsMain,
+                AvailableFrom = product.AvailableFrom
+            };
+        }
+
+        public async Task<List<ProductDto>> GetProductsAllAsync()
+        {
+            List<Product> productList = await _context.Products.ToListAsync();
+            List<ProductDto> productDtoList = new();
+
+            foreach (var product in productList)
+            {
+                productDtoList.Add(ToProductDto(product));
+            }
+
+            return productDtoList;
+        }
+
+        public async Task<RowCounter> AddNewProductsAsync(List<ProductDto> newProducts)
+        {
+            RowCounter rowCounter = new();
             foreach(var newProduct in newProducts)
             {
                 //DateTime current = DateTime.Now;
@@ -34,8 +67,17 @@ namespace ECommerce.Services
                     Modified = null
                 };
                 _context.Products.Add(product);
+                rowCounter.AddedRows++;
             }
             await _context.SaveChangesAsync();
+            return (rowCounter);
+        }
+
+        public async Task<RowCounter> DeleteProductsAllAsync()
+        {
+            RowCounter rowCounter = new();
+            rowCounter.DeletedRows = +await _context.Products.ExecuteDeleteAsync();
+            return rowCounter;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace ECommerce.Models;
 [Table("ProductColor")]
 public class ProductColor
 {
+    
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public required Guid Id { get; set; }

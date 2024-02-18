@@ -1,46 +1,69 @@
 ﻿using ECommerce.Data;
 using ECommerce.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
-using ECommerce.Models;
 using ECommerce.Models.Dtos;
+using ECommerce.Models;
+using ECommerce.Helpers;
+using ECommerce.Wrapper;
 
 namespace ECommerce.Controllers;
 
-[Route("api/")]
+[Route("api/[Controller]")]
 [ApiController]
 public class ApiProductsController : ControllerBase
 {
     private readonly IApiProductsService _apiProductsService;
-    private readonly ECommerceDbContext _context;
-    public ApiProductsController(ECommerceDbContext context, IApiProductsService apiProductsService)
+    private readonly IApiProductColorsService _apiProductColorsService;
+ 
+    public ApiProductsController(IApiProductsService apiProductsService, IApiProductColorsService apiProductColorsService)
     {
-        _context = context;
         _apiProductsService = apiProductsService;
+        _apiProductColorsService = apiProductColorsService;
     }
 
     #region Products
     /// <summary>
     /// Gets a List of Products from Database.
     /// </summary>
-    [HttpGet("Products")]
-    public IActionResult GetProductsAllAsync()
+    [HttpGet]
+    public async Task<ActionResult<ProductDto>> GetProductsAll()
     {
-        var allProducts = _context.Products.ToList();
-
-        return Ok(allProducts);
+        List<ProductDto> productDtos = await _apiProductsService.GetProductsAllAsync();
+        return Ok(productDtos);
     }
 
     /// <summary>
     /// Posts a List of given Products to Database.
     /// </summary>
-    [HttpPost("Products")]
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> PostProducts([FromBody] List<ProductDto> products)
     {
 
-        await _apiProductsService.AddNewProductsAsync(products);
+        RowCounter rowCounter = await _apiProductsService.AddNewProductsAsync(products);
+        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
         return Ok();
+    }
+
+    [HttpDelete("")]
+
+
+    /// <summary>
+    /// Deletes all Products from Databasee.
+    /// </summary>
+    [HttpDelete("All")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DeleteProductsAllAsync()
+    {
+        RowCounter rowCounter = await _apiProductsService.DeleteProductsAllAsync();
+        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
+
+        return NoContent();
     }
 
     #endregion
@@ -49,23 +72,10 @@ public class ApiProductsController : ControllerBase
     /// <summary>
     /// Posts a List of ProductColors to Database.
     /// </summary>
-    [HttpPost("ProductColors")]
-    public IActionResult PostProductColorsAsync([FromBody] List<ProductColorDto> newColors)
+    [HttpPost("Colors")]
+    public async Task<IActionResult> PostProductColors([FromBody] List<ProductColorDto> newProductColors)
     {
-        DateTime current = DateTime.Now;
-        foreach (var newColor in newColors)
-        {
-            ProductColor color = new()
-            {
-                Id = Guid.NewGuid(),
-                Description = newColor.Description,
-                Created = current,
-                Modified = null
-            };
-            _context.ProductColors.Add(color);
-        }
-        _context.SaveChanges();
-
+        await _apiProductColorsService.AddNewProductColorAsync(newProductColors);
         return Ok();
     }
     #endregion
