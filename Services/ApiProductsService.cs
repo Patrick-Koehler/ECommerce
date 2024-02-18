@@ -57,14 +57,20 @@ namespace ECommerce.Services
                     Id = Guid.NewGuid(),
                     ProductNumber = newProduct.ProductNumber,
                     Description = newProduct.Description,
+                    Description2 = null,
                     Color = newProduct.Color,
                     Size = newProduct.Size,
                     ClassificationSchemeGroup = newProduct.ClassificationSchemeGroup,
                     Cathegory = newProduct.Cathegory,
+                    EAN = null,
                     Manufacturer = newProduct.Manufacturer,
+                    ManufacturerNumber = null,
                     IsBike = newProduct.IsBike,
                     IsMain = newProduct.IsMain,
+                    DescriptionLong = null,
                     AvailableFrom = newProduct.AvailableFrom,
+                    RetailPrice = 1,
+                    RRP = 2,
                     Modified = null
                 };
                 _context.Products.Add(product);

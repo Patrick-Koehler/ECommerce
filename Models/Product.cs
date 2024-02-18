@@ -23,6 +23,7 @@ public class Product
     public string? ClassificationSchemeGroup { get; set; }
 
     public string? Cathegory { get; set; }
+    public string? DescriptionLong { get; set; }
     
     public string? Manufacturer { get; set; }
 
