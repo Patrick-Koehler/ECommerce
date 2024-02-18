@@ -51,17 +51,31 @@ namespace ECommerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductColor",
+                name: "ClassificationSchemeGroup",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassificationSchemeGroup", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Configurations",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CompanyImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductColor", x => x.Id);
+                    table.PrimaryKey("PK_Configurations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,12 +91,28 @@ namespace ECommerce.Migrations
                     Zip = table.Column<int>(type: "int", nullable: true),
                     Phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Birthday = table.Column<DateOnly>(type: "date", nullable: false),
+                    CustomerSince = table.Column<DateOnly>(type: "date", nullable: false),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customer", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DeliveryAdress",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeliveryAdress", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,17 +139,50 @@ namespace ECommerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Invoice",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoice", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InvoiceItem",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InvoiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FrameNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InvoiceItem", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DeliveryAdress = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderState = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Payment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsPayed = table.Column<bool>(type: "bit", nullable: false),
+                    Reference = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Notice = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrackingNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsNew = table.Column<bool>(type: "bit", nullable: false),
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false),
-                    OrderState = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Payment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Notice = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrderImportDate = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    OrderRecievedDate = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
@@ -129,27 +192,98 @@ namespace ECommerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OrderItem",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<double>(type: "float", nullable: false),
+                    RetailPriceNet = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RetailPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    VAT = table.Column<double>(type: "float", nullable: false),
+                    VATAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Payment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItem", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EAN = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Color = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Size = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClassificationSchemeGroup = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cathegory = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ManufacturerNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RetailPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    RRP = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     IsBike = table.Column<bool>(type: "bit", nullable: false),
                     IsMain = table.Column<bool>(type: "bit", nullable: false),
-                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
-                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true),
-                    AvailableFrom = table.Column<DateTime>(type: "smalldatetime", nullable: true)
+                    EAN = table.Column<int>(type: "int", nullable: true),
+                    ManufacturerNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RetailPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RRP = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AvailableFrom = table.Column<DateTime>(type: "smalldatetime", nullable: true),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductAttribute",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductAttribute", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductColor",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductColor", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductDetail",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EAN = table.Column<int>(type: "int", nullable: true),
+                    ManufacturerNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductDetail", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,28 +299,13 @@ namespace ECommerce.Migrations
                     ProductVariantNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Position = table.Column<int>(type: "int", nullable: true),
                     URL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductImage", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductInformation",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
-                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductInformation", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,32 +328,32 @@ namespace ECommerce.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductSize",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductSize", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductVariant",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductVariantNumber = table.Column<int>(type: "int", nullable: false),
-                    ProductVariantDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductVariant", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Size",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SizeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTime>(type: "smalldatetime", nullable: false),
-                    Modified = table.Column<DateTime>(type: "smalldatetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Size", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,6 +377,17 @@ namespace ECommerce.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stock", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StockBranch",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StockBranch", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -425,37 +555,61 @@ namespace ECommerce.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ProductColor");
+                name: "ClassificationSchemeGroup");
+
+            migrationBuilder.DropTable(
+                name: "Configurations");
 
             migrationBuilder.DropTable(
                 name: "Customer");
 
             migrationBuilder.DropTable(
+                name: "DeliveryAdress");
+
+            migrationBuilder.DropTable(
                 name: "ErrorMessage");
+
+            migrationBuilder.DropTable(
+                name: "Invoice");
+
+            migrationBuilder.DropTable(
+                name: "InvoiceItem");
 
             migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
+                name: "OrderItem");
+
+            migrationBuilder.DropTable(
                 name: "Product");
+
+            migrationBuilder.DropTable(
+                name: "ProductAttribute");
+
+            migrationBuilder.DropTable(
+                name: "ProductColor");
+
+            migrationBuilder.DropTable(
+                name: "ProductDetail");
 
             migrationBuilder.DropTable(
                 name: "ProductImage");
 
             migrationBuilder.DropTable(
-                name: "ProductInformation");
+                name: "ProductPrice");
 
             migrationBuilder.DropTable(
-                name: "ProductPrice");
+                name: "ProductSize");
 
             migrationBuilder.DropTable(
                 name: "ProductVariant");
 
             migrationBuilder.DropTable(
-                name: "Size");
+                name: "Stock");
 
             migrationBuilder.DropTable(
-                name: "Stock");
+                name: "StockBranch");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

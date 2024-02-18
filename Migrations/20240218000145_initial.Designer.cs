@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    [Migration("20240212222202_someChanges2")]
-    partial class someChanges2
+    [Migration("20240218000145_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,15 +25,37 @@ namespace ECommerce.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ECommerce.Models.ProductColor", b =>
+            modelBuilder.Entity("ECommerce.Models.ClassificationSchemeGroup", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClassificationSchemeGroup");
+                });
+
+            modelBuilder.Entity("ECommerce.Models.Configuration", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("CompanyImage")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("smalldatetime");
@@ -43,7 +65,7 @@ namespace ECommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductColor");
+                    b.ToTable("Configurations");
                 });
 
             modelBuilder.Entity("ECommerce.Models.Customer", b =>
@@ -51,6 +73,9 @@ namespace ECommerce.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("Birthday")
+                        .HasColumnType("date");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -60,6 +85,9 @@ namespace ECommerce.Migrations
 
                     b.Property<int>("CustomerNumber")
                         .HasColumnType("int");
+
+                    b.Property<DateOnly>("CustomerSince")
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -85,6 +113,26 @@ namespace ECommerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("ECommerce.Models.DeliveryAdress", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeliveryAdress");
                 });
 
             modelBuilder.Entity("ECommerce.Models.ErrorMessage", b =>
@@ -168,6 +216,29 @@ namespace ECommerce.Migrations
                     b.ToTable("Invoice");
                 });
 
+            modelBuilder.Entity("ECommerce.Models.InvoiceItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("FrameNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("InvoiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InvoiceItem");
+                });
+
             modelBuilder.Entity("ECommerce.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -180,10 +251,16 @@ namespace ECommerce.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DeliveryAdress")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsNew")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPayed")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Modified")
@@ -192,13 +269,20 @@ namespace ECommerce.Migrations
                     b.Property<string>("Notice")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderImportDate")
+                    b.Property<DateTime>("OrderRecievedDate")
                         .HasColumnType("smalldatetime");
 
                     b.Property<string>("OrderState")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Payment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrackingNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -215,8 +299,16 @@ namespace ECommerce.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("smalldatetime");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Modified")
                         .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Payment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
@@ -224,6 +316,21 @@ namespace ECommerce.Migrations
                     b.Property<string>("ProductNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<decimal>("RetailPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("RetailPriceNet")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<double>("VAT")
+                        .HasColumnType("float");
+
+                    b.Property<decimal>("VATAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -245,8 +352,15 @@ namespace ECommerce.Migrations
                     b.Property<string>("ClassificationSchemeGroup")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("smalldatetime");
+                    b.Property<Guid>("Color")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description2")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("EAN")
                         .HasColumnType("int");
@@ -266,26 +380,97 @@ namespace ECommerce.Migrations
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("smalldatetime");
 
-                    b.Property<string>("ProductDescription")
+                    b.Property<string>("ProductNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductDescription2")
+                    b.Property<decimal>("RRP")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("RetailPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("Size")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("ECommerce.Models.ProductAttribute", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductAttribute");
+                });
+
+            modelBuilder.Entity("ECommerce.Models.ProductColor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductColor");
+                });
+
+            modelBuilder.Entity("ECommerce.Models.ProductDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Description2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EAN")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ManufacturerNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("RRP")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("RetailPrice")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("ProductDetail");
                 });
 
             modelBuilder.Entity("ECommerce.Models.ProductImage", b =>
@@ -296,6 +481,9 @@ namespace ECommerce.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("smalldatetime");
+
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ImageDescription")
                         .HasColumnType("nvarchar(max)");
@@ -329,33 +517,6 @@ namespace ECommerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductImage");
-                });
-
-            modelBuilder.Entity("ECommerce.Models.ProductInformation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductInformation");
                 });
 
             modelBuilder.Entity("ECommerce.Models.ProductPrice", b =>
@@ -393,6 +554,27 @@ namespace ECommerce.Migrations
                     b.ToTable("ProductPrice");
                 });
 
+            modelBuilder.Entity("ECommerce.Models.ProductSize", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("smalldatetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductSize");
+                });
+
             modelBuilder.Entity("ECommerce.Models.ProductVariant", b =>
                 {
                     b.Property<Guid>("Id")
@@ -402,12 +584,12 @@ namespace ECommerce.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("smalldatetime");
 
-                    b.Property<DateTime?>("Modified")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("ProductVariantDescription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("smalldatetime");
 
                     b.Property<int>("ProductVariantNumber")
                         .HasColumnType("int");
@@ -415,27 +597,6 @@ namespace ECommerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductVariant");
-                });
-
-            modelBuilder.Entity("ECommerce.Models.Size", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<DateTime?>("Modified")
-                        .HasColumnType("smalldatetime");
-
-                    b.Property<string>("SizeDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Size");
                 });
 
             modelBuilder.Entity("ECommerce.Models.Stock", b =>
@@ -483,6 +644,17 @@ namespace ECommerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Stock");
+                });
+
+            modelBuilder.Entity("ECommerce.Models.StockBranch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StockBranch");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
