@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Models.Dtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Controllers
 {

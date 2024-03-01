@@ -44,7 +44,7 @@ public class ApiProductsController : ControllerBase
     {
 
         RowCounter rowCounter = await _apiProductsService.AddNewProductsAsync(products);
-        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
+        ResponseHeadersHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
         return Ok();
     }
 
@@ -61,7 +61,7 @@ public class ApiProductsController : ControllerBase
     public async Task<IActionResult> DeleteProductsByIdAsync([FromBody] Guid[] ids)
     {
         RowCounter rowCounter = await _apiProductsService.DeleteProductsByIdAsync(ids);
-        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter); 
+        ResponseHeadersHelper.AddRowInfoHeaders(Response.Headers, rowCounter); 
         return Ok();
     }
 
@@ -75,7 +75,7 @@ public class ApiProductsController : ControllerBase
     public async Task<IActionResult> DeleteProductsAllAsync()
     {
         RowCounter rowCounter = await _apiProductsService.DeleteProductsAllAsync();
-        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
+        ResponseHeadersHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
 
         return NoContent();
     }
@@ -90,7 +90,7 @@ public class ApiProductsController : ControllerBase
     public async Task<IActionResult> PostProductColors([FromBody] List<ProductColorDto> newProductColors)
     {
         RowCounter rowCounter = await _apiProductColorsService.AddNewProductColorAsync(newProductColors);
-        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
+        ResponseHeadersHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
         return Ok();
     }
     #endregion

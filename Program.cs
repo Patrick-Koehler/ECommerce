@@ -26,6 +26,7 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         //Services and ApiInterfaces
+        builder.Services.AddScoped<IApiErrorHandlerService, ApiErrorHandlerService>();
         builder.Services.AddScoped<IApiOrdersService, ApiOrdersService>();
         builder.Services.AddScoped<IApiProductsService, ApiProductsService>();
         builder.Services.AddScoped<IApiProductColorsService, ApiProductColorsService>();

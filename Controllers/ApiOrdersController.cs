@@ -23,7 +23,7 @@ public class ApiOrdersController : ControllerBase
     public async Task<IActionResult> PostOrder([FromBody] List<OrderDto> newOrders)
     {
         RowCounter rowCounter = await _apiOrdersService.AddNewOrderAsync(newOrders);
-        ResponseHeaderHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
+        ResponseHeadersHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
         return Ok();
     }
 

@@ -2,7 +2,7 @@
 
 namespace ECommerce.Helpers
 {
-    public static class ResponseHeaderHelper
+    public static class ResponseHeadersHelper
     {
         public static void AddRowInfoHeaders(IHeaderDictionary headers, int deleted, int added, int edited)
         {

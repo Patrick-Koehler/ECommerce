@@ -9,7 +9,6 @@ namespace ECommerce.Models;
 public partial class ClassificationSchemeGroup
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public required Guid Id { get; set; }
 
     [StringLength(50)]

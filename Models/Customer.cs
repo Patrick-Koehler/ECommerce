@@ -7,17 +7,20 @@ namespace ECommerce.Models;
 public class Customer
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public required Guid Id { get; set; }
 
     public required int CustomerNumber { get; set; }
-
+    
+    [StringLength(50)]
     public string? FirstName { get; set; }
 
+    [StringLength(50)]
     public string? LastName { get; set; }
 
+    [StringLength(50)]
     public string? Street { get; set; }
 
+    [StringLength(30)]
     public string? City { get; set; }
 
     public int? Zip { get; set; }
@@ -30,6 +33,7 @@ public class Customer
     
     public DateOnly CustomerSince { get; set; }
 
+    [StringLength(500)]
     public string? Info { get; set; }
     public bool IsOneTimeCustomer { get; set; }
 
