@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class ApiOrdersController : ControllerBase
 {
@@ -19,22 +19,23 @@ public class ApiOrdersController : ControllerBase
         _apiOrdersService = apiOrdersService;
     }
 
-    [HttpPost("Orders")]
-    public async Task<IActionResult> PostOrder([FromBody] List<OrderDto> newOrders)
+    [HttpPost]
+    public async Task<IActionResult> PostOrder([FromBody] OrderDto newOrder)
     {
-        RowCounter rowCounter = await _apiOrdersService.AddNewOrderAsync(newOrders);
+        RowCounter rowCounter = await _apiOrdersService.AddNewOrderAsync(newOrder);
         ResponseHeadersHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
         return Ok();
     }
 
-    [HttpDelete("Orders/All")]
+    [HttpDelete("All")]
     public async Task <IActionResult> DeleteOrdersAll()
     {
-        await _apiOrdersService.DeleteOrdersAll();
+        RowCounter rowCounter = await _apiOrdersService.DeleteOrdersAllAsync();
+        ResponseHeadersHelper.AddRowInfoHeaders(Response.Headers, rowCounter);
         return Ok();
     }
 
-    [HttpDelete("Orders/ById")]
+    [HttpDelete("ByOrderNumber")]
     public IActionResult DeleteOrdersById([FromBody] Guid id)
     {
         return Ok();

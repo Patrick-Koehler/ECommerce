@@ -71,6 +71,7 @@ namespace ECommerce.Services
                     AvailableFrom = newProduct.AvailableFrom,
                     RetailPrice = 1,
                     RRP = 2,
+                    Created = DateTime.Now,
                     Modified = null
                 };
                 _context.Products.Add(product);

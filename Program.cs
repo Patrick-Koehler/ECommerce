@@ -27,6 +27,7 @@ public class Program
 
         //Services and ApiInterfaces
         builder.Services.AddScoped<IApiErrorHandlerService, ApiErrorHandlerService>();
+        builder.Services.AddScoped<IApiCustomersService, ApiCustomersService>();
         builder.Services.AddScoped<IApiOrdersService, ApiOrdersService>();
         builder.Services.AddScoped<IApiProductsService, ApiProductsService>();
         builder.Services.AddScoped<IApiProductColorsService, ApiProductColorsService>();

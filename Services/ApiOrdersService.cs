@@ -17,40 +17,38 @@ namespace ECommerce.Services
             _context = context;
         }
 
-        public async Task<RowCounter> AddNewOrderAsync(List<OrderDto> newOrders)
+        public async Task<RowCounter> AddNewOrderAsync(OrderDto newOrder)
         {
             RowCounter rowCounter = new();
-            DateTime current = DateTime.Now;
-            foreach(var newOrder in newOrders)
+            Order order = new()
             {
-                Order order = new()
-                {
-                    Id = Guid.NewGuid(),
-                    CustomerId = Guid.Empty,
-                    DeliveryAdress = Guid.Empty,
-                    OrderState = OrderStatus.Recieved.ToString(),
-                    IsNew = true,
-                    IsPayed = newOrder.IsPayed,
-                    Payment = newOrder.Payment,
-                    IsCompleted = false,
-                    OrderRecievedDate = current,
-                    Created = current,
-                    Modified = null,
-                    Reference = newOrder.Reference,
-                    TrackingNumber = newOrder.TrackingNumber,
-                    Notice = newOrder.Notice,
+                Id = Guid.NewGuid(),
+                CustomerId = Guid.Empty,
+                DeliveryAdressId = Guid.Empty,
+                OrderState = OrderStatus.Recieved.ToString(),
+                IsNew = true,
+                IsPayed = newOrder.IsPayed,
+                Payment = newOrder.Payment,
+                IsCompleted = false,
+                OrderRecievedDate = DateTime.Now,
+                Created = DateTime.Now,
+                Modified = null,
+                Reference = newOrder.Reference,
+                TrackingNumber = newOrder.TrackingNumber,
+                Notice = newOrder.Notice,
 
-                };
-                _context.Orders.Add(order);
-                rowCounter.AddedRows++;
-            }
+            };
+            _context.Orders.Add(order);
             await _context.SaveChangesAsync();
+            rowCounter.AddedRows++;
             return rowCounter;
         }
 
-        public async Task DeleteOrdersAll()
+        public async Task<RowCounter> DeleteOrdersAllAsync()
         {
-            await _context.Products.ExecuteDeleteAsync();
+            RowCounter rowCounter = new();
+            rowCounter.DeletedRows = await _context.Products.ExecuteDeleteAsync();
+            return rowCounter;
         }
     }
 }

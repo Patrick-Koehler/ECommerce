@@ -9,7 +9,7 @@ public class Customer
     [Key]
     public required Guid Id { get; set; }
 
-    public required int CustomerNumber { get; set; }
+    public required string CustomerNumber { get; set; }
     
     [StringLength(50)]
     public string? FirstName { get; set; }
@@ -35,7 +35,12 @@ public class Customer
 
     [StringLength(500)]
     public string? Info { get; set; }
+
     public bool IsOneTimeCustomer { get; set; }
+
+    public string? UserId { get; set; }
+
+    public string? UserPassword { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public required DateTime Created { get; set; }

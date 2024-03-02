@@ -7,7 +7,6 @@ namespace ECommerce.Models;
 public class DeliveryAdress
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public required Guid Id { get; set; }
 
     public required Guid CustomerId { get; set; }
@@ -30,8 +29,7 @@ public class DeliveryAdress
 
     public string? Email { get; set; }
 
-    [StringLength(500)]
-    public string? Info { get; set; }
+    public required bool IsMain { get; set; } = false;
 
     [Column(TypeName = "smalldatetime")]
     public required DateTime Created { get; set; }

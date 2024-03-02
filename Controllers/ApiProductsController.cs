@@ -8,7 +8,7 @@ using ECommerce.Wrapper;
 
 namespace ECommerce.Controllers;
 
-[Route("api/[Controller]")]
+[Route("[Controller]")]
 [ApiController]
 public class ApiProductsController : ControllerBase
 {

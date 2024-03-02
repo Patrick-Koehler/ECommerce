@@ -7,7 +7,6 @@ namespace ECommerce.Models;
 public class Product
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public required Guid Id { get; set; }
     
     public required string ProductNumber { get; set; }
@@ -23,6 +22,7 @@ public class Product
     public string? ClassificationSchemeGroup { get; set; }
 
     public string? Cathegory { get; set; }
+    
     public string? DescriptionLong { get; set; }
     
     public string? Manufacturer { get; set; }
@@ -41,6 +41,9 @@ public class Product
 
     [Column(TypeName = "smalldatetime")]
     public DateTime? AvailableFrom { get; set; }
+
+    [Column(TypeName = "smalldatetime")]
+    public required DateTime Created { get; set; }
 
     [Column(TypeName = "smalldatetime")]
     public DateTime? Modified { get; set; }
