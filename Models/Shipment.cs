@@ -20,6 +20,6 @@ namespace ECommerce.Models
         public required DateTime Created { get; set; }
 
         [Column(TypeName = "smalldatetime")]
-        public DateTime Modified { get; set; }
+        public DateTime? Modified { get; set; }
     }
 }

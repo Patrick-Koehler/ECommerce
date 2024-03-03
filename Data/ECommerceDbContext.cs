@@ -28,6 +28,9 @@ namespace ECommerce.Data
         public DbSet<ProductPrice> ProductPrices { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
+        public DbSet<SerialNumberList> SerialNumberLists { get; set; }
+        public DbSet<Shipment> Shipments { get; set; }
+        public DbSet<ShipmentItem> ShipmentItems { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<StockBranch> StocksBranches { get; set; } 
 
