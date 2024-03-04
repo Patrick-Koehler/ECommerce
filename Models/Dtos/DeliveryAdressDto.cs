@@ -1,9 +1,7 @@
 ﻿namespace ECommerce.Models.Dtos;
 
 public class DeliveryAdressDto
-{
-    public required Guid CustomerId { get; set; }
-    
+{   
     public required string CustomerNumber { get; set; }
 
     public string? FirstName { get; set; }

@@ -23,7 +23,7 @@ namespace ECommerce.Services
                                             && x.LastName == customer.LastName && x.Email == customer.Email && x.Birthday == customer.Birthday);
         }
 
-        public bool HasValidForeignKeys(CustomerDto customer)
+        public bool CustomerHasValidForeignKeys(CustomerDto customer)
         {
             return true; //string.IsNullOrEmpty(customer.Street) || _context.DeliveryAdresses.Any(x => x.Street == customer.Street);
         }

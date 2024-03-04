@@ -28,10 +28,12 @@ public class Customer
     public string? Phonenumber { get; set; }
 
     public string? Email { get; set; }
-    
-    public DateOnly Birthday { get; set; }
-    
-    public DateOnly CustomerSince { get; set; }
+
+    [Column(TypeName = "smalldatetime")]
+    public DateTime Birthday { get; set; }
+
+    [Column(TypeName = "smalldatetime")]
+    public DateTime CustomerSince { get; set; }
 
     [StringLength(500)]
     public string? Info { get; set; }

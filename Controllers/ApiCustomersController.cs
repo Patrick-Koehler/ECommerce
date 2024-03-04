@@ -54,7 +54,7 @@ public class ApiCustomersController : Controller
                 }
                 if (useValidation)
                 {
-                    if (!_apiCustomersService.HasValidForeignKeys(newCustomer))
+                    if (!_apiCustomersService.CustomerHasValidForeignKeys(newCustomer))
                     {
                         invalidForeignKeys.Add(newCustomer);
                     }

@@ -4,31 +4,89 @@
     ViewData["Title"] = "Kunde";
 }
 
-<form asp-controller="Customer" asp-action="CustomerDetails">
+<form asp-controller="Customers" asp-action="CreateCustomer">
     <div class="card">
         <div class="card-header">
             <h5>Kunde</h5>
         </div>
 
         <div class="card-body">
-            <div class="row">
-            <div class="col">
-                <label class="form-label">Vorname</label>
+            <div class="row mb-3">
                 <div class="col-sm-3">
+                    <label class="form-label">Vorname</label>
                     <input class="form-control form-control-sm" type="text" asp-for="FirstName" placeholder="" />
                 </div>
-            </div>
-            <div class="col">
-                <label class="form-label">Nachname</label>
                 <div class="col-sm-3">
+                    <label class="form-label">Nachname</label>
                     <input class="form-control form-control-sm" type="text" asp-for="LastName" placeholder="" />
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label class="form-label">Vorname</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="FirstName" placeholder="" />
+                </div>
+                <div class="col-sm-3">
+                    <label class="form-label">Nachname</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="LastName" placeholder="" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label class="form-label">Postleitzahl</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="Zip" placeholder="" />
+                </div>
+                <div class="col-sm-3">
+                    <label class="form-label">Stadt</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="City" placeholder="" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label class="form-label">E-Mail</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="Email" placeholder="" />
+                </div>
+                <div class="col-sm-3">
+                    <label class="form-label">Telefon</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="Phonenumber" placeholder="" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label class="form-label">Geburtstag</label>
+                    <input class="form-control form-control-sm" type="date" asp-for="Birthday" placeholder="" />
+                </div>
+                <div class="col-sm-3">
+                    <label class="form-label">Kunde seit:</label>
+                    <input class="form-control form-control-sm" type="date" asp-for="CustomerSince" placeholder="" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label class="form-label">BenutzerId</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="UserId" placeholder="" />
+                </div>
+                <div class="col-sm-3">
+                    <label class="form-label">Passwort</label>
+                    <input class="form-control form-control-sm" type="text" asp-for="UserPassword" placeholder="" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label">Kundeninfo</label>
+                    <textarea rows="6" class="form-control form-control-sm" asp-for="Info"></textarea>
+                </div>
             </div>
         </div>
 
         <div class="card-footer">
-            <button class="btn btn-primary" type="submit">Speichern</button>
+            <button class="btn btn-primary" type="submit" style="float: right;">Save changes</button>
         </div>
     </div>
 </form>

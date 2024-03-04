@@ -11,6 +11,7 @@ public class ProductsController : Controller
     {
         _context = context;
     }
+
     public IActionResult ProductOverview()
     {
         var products = _context.Products.ToList();
